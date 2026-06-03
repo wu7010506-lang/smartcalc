@@ -1,0 +1,101 @@
+import { useState, useMemo } from 'react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
+export default function MortgageCalc() {
+  const [loanAmount, setLoanAmount] = useState<number>(10000000);
+  const [years, setYears] = useState<number>(30);
+  const [interestRate, setInterestRate] = useState<number>(2.06);
+  const [gracePeriodYears, setGracePeriodYears] = useState<number>(0);
+  const [extraYearlyRepayment, setExtraYearlyRepayment] = useState<number>(0);
+
+  const results = useMemo(() => {
+    const totalMonths = years * 12;
+    const graceMonths = gracePeriodYears * 12;
+    const monthlyRate = interestRate / 100 / 12;
+    
+    // Original plan
+    let monthlyPayment = 0;
+    const remainingMonths = totalMonths - graceMonths;
+    if (remainingMonths > 0 && monthlyRate > 0) {
+      const x = Math.pow(1 + monthlyRate, remainingMonths);
+      monthlyPayment = Math.round((loanAmount * monthlyRate * x) / (x - 1));
+    } else {
+      monthlyPayment = Math.round(loanAmount / remainingMonths);
+    }
+
+    // Comparison logic: Simulate early repayment impact
+    // This is a simplified projection for the "Extra Repayment" impact
+    const totalInterestOriginal = (monthlyPayment * remainingMonths) - loanAmount;
+    
+    // Rough estimate of savings: 
+    // If extraYearlyRepayment is added, it reduces principal faster.
+    // Savings = (ExtraRepayment * Years) * (InterestRate/100) * factor
+    const savingsEstimate = Math.round(extraYearlyRepayment * years * (interestRate / 100) * 0.8);
+    const totalInterestNew = Math.max(0, totalInterestOriginal - savingsEstimate);
+
+    return {
+      monthlyPayment,
+      totalInterestOriginal,
+      totalInterestNew,
+      savings: savingsEstimate,
+      chartData: [
+        { name: '原計畫', interest: totalInterestOriginal },
+        { name: '提前還款計畫', interest: totalInterestNew }
+      ]
+    };
+  }, [loanAmount, years, interestRate, gracePeriodYears, extraYearlyRepayment]);
+
+  const formatCurrency = (val: number) => {
+    return new Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', maximumFractionDigits: 0 }).format(val);
+  };
+
+  return (
+    <div className="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden p-8">
+      <h2 className="text-2xl font-bold text-slate-900 mb-6">貸款彈性試算</h2>
+      
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-slate-700">貸款總額</label>
+            <input type="number" value={loanAmount} onChange={(e) => setLoanAmount(Number(e.target.value))} className="w-full p-3 border rounded-xl" />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+             <div>
+                <label className="block text-sm font-medium text-slate-700">年限 (年)</label>
+                <input type="number" value={years} onChange={(e) => setYears(Number(e.target.value))} className="w-full p-3 border rounded-xl" />
+             </div>
+             <div>
+                <label className="block text-sm font-medium text-slate-700">年利率 (%)</label>
+                <input type="number" value={interestRate} onChange={(e) => setInterestRate(Number(e.target.value))} step="0.01" className="w-full p-3 border rounded-xl" />
+             </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700">每年額外償還本金 (TWD)</label>
+            <input type="number" value={extraYearlyRepayment} onChange={(e) => setExtraYearlyRepayment(Number(e.target.value))} className="w-full p-3 border border-blue-500 rounded-xl bg-blue-50" />
+            <p className="text-xs text-slate-500 mt-1">透過每年多還一點本金，觀察利息省下多少</p>
+          </div>
+        </div>
+
+        <div className="bg-slate-50 p-6 rounded-2xl">
+          <h3 className="font-bold text-slate-800 mb-4">利息支出對比</h3>
+          <div className="h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={results.chartData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip formatter={(value: number) => formatCurrency(value)} />
+                <Legend />
+                <Line type="monotone" dataKey="interest" name="利息總支出" stroke="#8884d8" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+          <div className="mt-4 p-4 bg-green-100 text-green-800 rounded-xl text-center">
+            <p className="text-sm">若採用提前還款計畫</p>
+            <p className="text-2xl font-bold">預計可省下 {formatCurrency(results.savings)}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

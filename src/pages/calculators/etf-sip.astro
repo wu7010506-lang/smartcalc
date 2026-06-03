@@ -1,0 +1,85 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import EtfSipCalc from '../../components/calculators/EtfSipCalc.tsx';
+---
+
+<Layout 
+  title="台股 ETF 定期定額計算機 | 0050, 00878 存股試算" 
+  description="專為台灣投資人設計的 ETF 定期定額存股計算機。內建 0050、0056、00878 等熱門台股 ETF 預估報酬率，幫您算出未來的股息與資產總值。"
+>
+  <Navbar />
+  
+  <main class="flex-grow bg-slate-50 py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+      <!-- Breadcrumbs & Header -->
+      <div class="mb-8">
+        <nav class="flex text-sm text-slate-500 mb-4" aria-label="Breadcrumb">
+          <ol class="inline-flex items-center space-x-1 md:space-x-3">
+            <li class="inline-flex items-center">
+              <a href="/" class="hover:text-indigo-600 transition-colors">首頁</a>
+            </li>
+            <li>
+              <div class="flex items-center">
+                <svg class="w-4 h-4 text-slate-400 mx-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                <a href="#" class="hover:text-indigo-600 transition-colors">投資理財</a>
+              </div>
+            </li>
+            <li aria-current="page">
+              <div class="flex items-center">
+                <svg class="w-4 h-4 text-slate-400 mx-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                <span class="text-slate-800 font-medium">ETF 定期定額試算</span>
+              </div>
+            </li>
+          </ol>
+        </nav>
+        
+        <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">台股 ETF 定期定額存股試算</h1>
+        <p class="text-lg text-slate-600 max-w-3xl">
+          想知道每個月存一萬塊買 0050 或 00878，十年後能滾出多少錢嗎？我們內建了熱門台股 ETF 的「歷史預估報酬與殖利率」，幫您快速推算出未來的被動收入與資產成長。
+        </p>
+      </div>
+
+      <!-- Main Calculator Component -->
+      <EtfSipCalc client:load />
+
+      <!-- Educational Content (SEO) -->
+      <article class="mt-16 prose prose-slate max-w-none bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+        <h2 class="text-2xl font-bold text-slate-900 mb-6">市值型 ETF vs 高股息 ETF，該怎麼選？</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-lg font-bold text-slate-800 mb-2">📈 市值型 ETF (例如 0050, 006208)</h3>
+            <p class="text-slate-600 mb-4 text-sm">
+              這類 ETF 追蹤的是台灣市值最大的幾間公司（通常台積電佔比很高）。它們的特色是「殖利率較低（約 3-4%）」，但是「資本利得（股價上漲的空間）較大」。<br/>
+              <strong>👉 適合誰：</strong> 距離退休還有 10 年以上的年輕人。因為你不需要馬上靠股息生活，追求資產總額的最大化才是首要目標。
+            </p>
+            <h3 class="text-lg font-bold text-slate-800 mb-2">💰 高股息 ETF (例如 0056, 00878, 00713)</h3>
+            <p class="text-slate-600 text-sm">
+              這類 ETF 專門挑選配息穩定、殖利率高的公司。特色是「殖利率高（約 6-8%）」，但股價上漲的動能通常不如市值型。<br/>
+              <strong>👉 適合誰：</strong> 準備退休，或是極度渴望現在每個月/每一季都能有穩定現金流入帳的人。
+            </p>
+          </div>
+          <div class="bg-red-50 p-6 rounded-xl border border-red-100">
+            <h4 class="font-bold text-red-900 mb-2">💡 存股族必看的「複利開關」</h4>
+            <p class="text-red-800 text-sm mb-4">
+              在上面的計算機中，有一個最重要的選項：<strong>「股息自動再投入」</strong>。
+            </p>
+            <ul class="space-y-2 text-red-800 text-sm">
+              <li>如果你把每年領到的股息拿去吃喝玩樂，你的資產只會呈現「線性成長」。</li>
+              <li>如果你把配發的股息，再次買入該檔 ETF 累積股數，資產就會開始產生可怕的「指數型成長（複利效應）」。</li>
+              <li>強烈建議在累積資產的階段，務必將股息再投入！</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+      
+      <!-- Top Ad Placeholder -->
+      <div class="mt-8 bg-slate-200 border border-slate-300 border-dashed rounded-xl h-24 flex flex-col items-center justify-center text-slate-500">
+         <span class="font-medium text-sm">AdSpace - 內容底部廣告</span>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

@@ -1,0 +1,82 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import FireCalc from '../../components/calculators/FireCalc.tsx';
+---
+
+<Layout 
+  title="FIRE 財務自由計算機 | 提早退休反推器" 
+  description="夢想提早退休？利用我們的 FIRE (Financial Independence, Retire Early) 計算機，輸入您的目標被動收入，一秒反推您現在每個月需要存多少錢！"
+>
+  <Navbar />
+  
+  <main class="flex-grow bg-slate-50 py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+      <!-- Breadcrumbs & Header -->
+      <div class="mb-8">
+        <nav class="flex text-sm text-slate-500 mb-4" aria-label="Breadcrumb">
+          <ol class="inline-flex items-center space-x-1 md:space-x-3">
+            <li class="inline-flex items-center">
+              <a href="/" class="hover:text-indigo-600 transition-colors">首頁</a>
+            </li>
+            <li>
+              <div class="flex items-center">
+                <svg class="w-4 h-4 text-slate-400 mx-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                <a href="#" class="hover:text-indigo-600 transition-colors">人生規劃</a>
+              </div>
+            </li>
+            <li aria-current="page">
+              <div class="flex items-center">
+                <svg class="w-4 h-4 text-slate-400 mx-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                <span class="text-slate-800 font-medium">FIRE 財務自由計算機</span>
+              </div>
+            </li>
+          </ol>
+        </nav>
+        
+        <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">FIRE 財務自由計算機 🎯</h1>
+        <p class="text-lg text-slate-600 max-w-3xl">
+          別再漫無目的地存錢了！這個工具採用「逆向工程」思維。告訴我們您的退休夢想，我們給您最真實的「殘酷行動指南」——精算出您<strong class="text-orange-600 font-bold">每個月到底該存多少錢</strong>。
+        </p>
+      </div>
+
+      <!-- Main Calculator Component -->
+      <FireCalc client:load />
+
+      <!-- Educational Content (SEO) -->
+      <article class="mt-16 prose prose-slate max-w-none bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+        <h2 class="text-2xl font-bold text-slate-900 mb-6">什麼是 FIRE 運動？4% 法則又是什麼？</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <p class="text-slate-600 mb-4 text-sm">
+              **FIRE (Financial Independence, Retire Early)** 意即「財務獨立，提早退休」。這是一種源自美國的理財運動，核心理念是透過極致的儲蓄與穩健的投資，在法定退休年齡之前，讓自己的「被動收入」大於「生活開銷」。
+            </p>
+            <h3 class="text-lg font-bold text-slate-800 mt-6 mb-2">神奇的 4% 法則 (The 4% Rule)</h3>
+            <p class="text-slate-600 text-sm">
+              根據著名的「三一研究 (Trinity Study)」，如果您將資金投資於股票與債券的組合中，每年固定提領總資金的 **4%** 作為生活費，且依據通膨調整，這筆退休金在 30 年內被花光的機率極低。這也就是為什麼我們可以用「年開銷 ÷ 4%」來反推您的 **FIRE Number (財務自由數字)**。
+            </p>
+          </div>
+          <div class="bg-orange-50 p-6 rounded-xl border border-orange-100">
+            <h4 class="font-bold text-orange-900 mb-2">舉個例子 📝</h4>
+            <p class="text-orange-800 text-sm mb-4">
+              假設您希望退休後，每個月有 5 萬元可以花。
+            </p>
+            <ul class="space-y-2 text-orange-800 text-sm">
+              <li>一年需要的總花費為：5萬 × 12個月 = **60 萬元**</li>
+              <li>根據 4% 法則，您的 FIRE Number 為：60萬 ÷ 4% = **1,500 萬元**</li>
+              <li>只要您存到 1,500 萬，並放在年化報酬率大於 4% 的資產中，您就能隨時向老闆遞出辭呈！</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+      
+      <!-- Top Ad Placeholder -->
+      <div class="mt-8 bg-slate-200 border border-slate-300 border-dashed rounded-xl h-24 flex flex-col items-center justify-center text-slate-500">
+         <span class="font-medium text-sm">AdSpace - 內容底部廣告</span>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

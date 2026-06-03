@@ -1,0 +1,81 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import MortgageCalc from '../../components/calculators/MortgageCalc.tsx';
+---
+
+<Layout 
+  title="房貸試算工具 | 本息攤還與寬限期計算" 
+  description="免費好用的房貸計算器，支援本息攤還與寬限期設定，幫您精準預估每月還款金額與總利息支出，買房規劃更安心。"
+>
+  <Navbar />
+  
+  <main class="flex-grow bg-slate-50 py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+      <!-- Breadcrumbs & Header -->
+      <div class="mb-8">
+        <nav class="flex text-sm text-slate-500 mb-4" aria-label="Breadcrumb">
+          <ol class="inline-flex items-center space-x-1 md:space-x-3">
+            <li class="inline-flex items-center">
+              <a href="/" class="hover:text-indigo-600 transition-colors">首頁</a>
+            </li>
+            <li>
+              <div class="flex items-center">
+                <svg class="w-4 h-4 text-slate-400 mx-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                <a href="#" class="hover:text-indigo-600 transition-colors">理財工具</a>
+              </div>
+            </li>
+            <li aria-current="page">
+              <div class="flex items-center">
+                <svg class="w-4 h-4 text-slate-400 mx-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                <span class="text-slate-800 font-medium">房貸試算</span>
+              </div>
+            </li>
+          </ol>
+        </nav>
+        
+        <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">房貸試算工具</h1>
+        <p class="text-lg text-slate-600 max-w-3xl">
+          買房是人生大事，精準掌握每月還款金流是第一步。我們的房貸計算器支援常見的「本息平均攤還」計算，並能設定「寬限期」，讓您輕鬆評估不同貸款方案的壓力與總成本。
+        </p>
+      </div>
+
+      <!-- Main Calculator Component -->
+      <MortgageCalc client:load />
+
+      <!-- Educational Content (SEO) -->
+      <article class="mt-16 prose prose-slate max-w-none bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+        <h2 class="text-2xl font-bold text-slate-900 mb-6">買房必懂的貸款知識</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-lg font-bold text-slate-800 mb-2">本息平均攤還 vs 本金平均攤還</h3>
+            <p class="text-slate-600 mb-4 text-sm">
+              <strong class="text-slate-900">本息平均攤還：</strong>（最常見）在利率不變的情況下，每個月要繳的金額都是一樣的。優點是每月支出固定，方便理財規劃；缺點是總繳利息會比本金攤還多。
+            </p>
+            <p class="text-slate-600 text-sm">
+              <strong class="text-slate-900">本金平均攤還：</strong>每個月還的「本金」固定，利息則依剩餘本金計算。前期還款壓力最大，但之後會逐月遞減，總利息支出較少。
+            </p>
+          </div>
+          <div class="bg-blue-50 p-6 rounded-xl border border-blue-100">
+            <h4 class="font-bold text-blue-900 mb-2">什麼是「寬限期」？</h4>
+            <p class="text-blue-800 text-sm mb-2">
+              寬限期 (Grace Period) 指的是在貸款初期的一段時間內（通常是 1 到 5 年），您<strong>「只需要繳納利息，不需要償還本金」</strong>。
+            </p>
+            <ul class="space-y-1 text-blue-800 text-sm list-disc pl-4">
+              <li><strong>優點：</strong> 大幅降低初期的還款壓力，適合剛買房需要裝潢、買家電的年輕族群。</li>
+              <li><strong>缺點：</strong> 寬限期結束後，剩餘本金必須在較短的年限內攤還，導致後期的每月還款金額暴增（稱為「氣球效應」）。此外，總繳利息也會較高。</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+      
+      <!-- Top Ad Placeholder -->
+      <div class="mt-8 bg-slate-200 border border-slate-300 border-dashed rounded-xl h-24 flex flex-col items-center justify-center text-slate-500">
+         <span class="font-medium text-sm">AdSpace - 內容底部廣告</span>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

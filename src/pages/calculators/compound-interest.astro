@@ -1,0 +1,96 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import CompoundInterestCalc from '../../components/calculators/CompoundInterestCalc.tsx';
+---
+
+<Layout 
+  title="複利計算器 | 定期定額投資試算" 
+  description="免費好用的複利計算器，幫助您試算定期定額投資在時間與複利效應下的驚人增長，輕鬆規劃退休藍圖。"
+>
+  <Navbar />
+  
+  <main class="flex-grow bg-slate-50 py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+      <!-- Breadcrumbs & Header -->
+      <div class="mb-8">
+        <nav class="flex text-sm text-slate-500 mb-4" aria-label="Breadcrumb">
+          <ol class="inline-flex items-center space-x-1 md:space-x-3">
+            <li class="inline-flex items-center">
+              <a href="/" class="hover:text-indigo-600 transition-colors">首頁</a>
+            </li>
+            <li>
+              <div class="flex items-center">
+                <svg class="w-4 h-4 text-slate-400 mx-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                <a href="#" class="hover:text-indigo-600 transition-colors">理財工具</a>
+              </div>
+            </li>
+            <li aria-current="page">
+              <div class="flex items-center">
+                <svg class="w-4 h-4 text-slate-400 mx-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                <span class="text-slate-800 font-medium">複利計算器</span>
+              </div>
+            </li>
+          </ol>
+        </nav>
+        
+        <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">複利計算器</h1>
+        <p class="text-lg text-slate-600 max-w-3xl">
+          愛因斯坦曾說：「複利是世界第八大奇蹟」。透過定期定額的紀律投資，讓時間成為你累積財富的最佳幫手。輸入您的投資條件，立即看看未來的財富增長軌跡。
+        </p>
+      </div>
+
+      <!-- Main Calculator Component (Interactive React Component) -->
+      <CompoundInterestCalc client:load />
+
+      <!-- Educational Content (Good for SEO) -->
+      <article class="mt-16 prose prose-slate max-w-none bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+        <h2 class="text-2xl font-bold text-slate-900 mb-6">什麼是複利？為什麼它如此重要？</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <p class="text-slate-600 mb-4">
+              複利 (Compound Interest) 簡單來說就是「利滾利」。當您將一筆資金進行投資並獲得報酬後，如果不將獲利領出，而是繼續投入本金中產生新的報酬，這就是複利效應。
+            </p>
+            <p class="text-slate-600">
+              相較於單利（只有原始本金產生利息），複利的增長曲線在初期可能看似緩慢，但隨著時間拉長，將會呈現驚人的指數型成長。這也是為什麼所有的理財專家都建議「盡早開始投資」。
+            </p>
+          </div>
+          <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-100">
+            <h4 class="font-bold text-indigo-900 mb-2">💡 複利的三大核心要素</h4>
+            <ul class="space-y-2 text-indigo-800 text-sm">
+              <li><span class="font-bold">1. 投入資金 (本金)：</span> 越大的雪球基底，能滾出越大的雪球。</li>
+              <li><span class="font-bold">2. 報酬率 (坡度)：</span> 找到長期穩健的投資標的，例如大盤 ETF。</li>
+              <li><span class="font-bold">3. 時間 (坡道長度)：</span> 最關鍵的要素！時間越長，複利威力越驚人。</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+      
+      <!-- Top Ad Placeholder (Under Content) -->
+      <div class="mt-8 bg-slate-200 border border-slate-300 border-dashed rounded-xl h-24 flex flex-col items-center justify-center text-slate-500">
+         <span class="font-medium text-sm">AdSpace - 內容底部廣告</span>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* Custom scrollbar for the table in React component */
+  :global(.custom-scrollbar::-webkit-scrollbar) {
+    width: 6px;
+  }
+  :global(.custom-scrollbar::-webkit-scrollbar-track) {
+    background: #f1f5f9; 
+    border-radius: 4px;
+  }
+  :global(.custom-scrollbar::-webkit-scrollbar-thumb) {
+    background: #cbd5e1; 
+    border-radius: 4px;
+  }
+  :global(.custom-scrollbar::-webkit-scrollbar-thumb:hover) {
+    background: #94a3b8; 
+  }
+</style>

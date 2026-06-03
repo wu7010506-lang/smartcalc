@@ -1,0 +1,84 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import ROICalc from '../../components/calculators/ROICalc.tsx';
+---
+
+<Layout 
+  title="投資報酬率計算器 (ROI) | 年化報酬率試算" 
+  description="免費的 ROI 投資報酬率計算器，幫您快速算出總報酬率與真實的「年化報酬率」，精準評估股票、房地產等各項投資績效。"
+>
+  <Navbar />
+  
+  <main class="flex-grow bg-slate-50 py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+      <!-- Breadcrumbs & Header -->
+      <div class="mb-8">
+        <nav class="flex text-sm text-slate-500 mb-4" aria-label="Breadcrumb">
+          <ol class="inline-flex items-center space-x-1 md:space-x-3">
+            <li class="inline-flex items-center">
+              <a href="/" class="hover:text-indigo-600 transition-colors">首頁</a>
+            </li>
+            <li>
+              <div class="flex items-center">
+                <svg class="w-4 h-4 text-slate-400 mx-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                <a href="#" class="hover:text-indigo-600 transition-colors">理財工具</a>
+              </div>
+            </li>
+            <li aria-current="page">
+              <div class="flex items-center">
+                <svg class="w-4 h-4 text-slate-400 mx-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                <span class="text-slate-800 font-medium">投資報酬率 (ROI)</span>
+              </div>
+            </li>
+          </ol>
+        </nav>
+        
+        <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">投資報酬率計算器 (ROI)</h1>
+        <p class="text-lg text-slate-600 max-w-3xl">
+          賺了 20% 真的算多嗎？這取決於您花了多少時間！使用這款 ROI 計算器，不僅能算出總獲利，更能幫您還原真實的「年化報酬率」，讓不同投資標的（股票、房產、定存）能放在同一個基準點上比較。
+        </p>
+      </div>
+
+      <!-- Main Calculator Component -->
+      <ROICalc client:load />
+
+      <!-- Educational Content (SEO) -->
+      <article class="mt-16 prose prose-slate max-w-none bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+        <h2 class="text-2xl font-bold text-slate-900 mb-6">為什麼「年化報酬率」比「總報酬率」更重要？</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <p class="text-slate-600 mb-4 text-sm">
+              在評估一項投資績效時，很多人只看<strong>總報酬率 (Total ROI)</strong>。例如：買了一檔股票，最後賺了 30%。聽起來很棒對吧？
+            </p>
+            <p class="text-slate-600 mb-4 text-sm">
+              但如果這 30% 是花了 10 年才賺到的，平均下來每年的獲利其實不到 3%。這可能比有些高利活存還要低！這就是為什麼我們需要計算<strong>年化報酬率 (Annualized ROI)</strong>。
+            </p>
+            <p class="text-slate-600 text-sm">
+              年化報酬率將「時間」因素與「複利」效應考慮進去，把它換算成「相當於每年穩定獲利多少百分比」。這樣你才能將「放了 3 年的股票」跟「放了 1 年的定存」進行公平的比較。
+            </p>
+          </div>
+          <div class="bg-orange-50 p-6 rounded-xl border border-orange-100">
+            <h4 class="font-bold text-orange-900 mb-2">舉個常見的陷阱例子</h4>
+            <p class="text-orange-800 text-sm mb-2">
+              某儲蓄險標榜「滿期 6 年，總報酬率高達 12%！」
+            </p>
+            <ul class="space-y-2 text-orange-800 text-sm">
+              <li>聽起來好像每年有 2% (12 / 6 = 2)？</li>
+              <li><strong>錯了！</strong>如果用年化報酬率公式計算，並考慮複利折現，實際的年化報酬率可能只有 <strong>1.89%</strong> 左右。</li>
+              <li>這就是為什麼善用計算器算出真實年化報酬率，是每個聰明投資人的必修課。</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+      
+      <!-- Top Ad Placeholder -->
+      <div class="mt-8 bg-slate-200 border border-slate-300 border-dashed rounded-xl h-24 flex flex-col items-center justify-center text-slate-500">
+         <span class="font-medium text-sm">AdSpace - 內容底部廣告</span>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

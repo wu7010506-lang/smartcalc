@@ -1,0 +1,135 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+// Placeholder array for the calculators
+const calculators = [
+  {
+    title: "FIRE 財務自由反推",
+    description: "夢想提早退休？輸入您的目標被動收入，一秒反推您現在每個月需要存多少錢！",
+    icon: "target",
+    link: "/calculators/fire",
+    color: "bg-orange-500",
+    tags: ["退休", "人生規劃"]
+  },
+  {
+    title: "台股 ETF 定期定額",
+    description: "內建 0050, 00878 歷史回測數據，精準預估未來的被動收入與資產總值。",
+    icon: "trending-up",
+    link: "/calculators/etf-sip",
+    color: "bg-red-500",
+    tags: ["存股", "台股"]
+  },
+  {
+    title: "複利計算器",
+    description: "計算投資在時間與複利效應下的增長，規劃提早退休藍圖。",
+    icon: "chart-line",
+    link: "/calculators/compound-interest",
+    color: "bg-emerald-500",
+    tags: ["投資", "理財"]
+  },
+  {
+    title: "房貸試算",
+    description: "本息攤還、本金攤還試算，精準掌握每月還款金額與總利息。",
+    icon: "home",
+    link: "/calculators/mortgage",
+    color: "bg-blue-500",
+    tags: ["買房", "貸款"]
+  },
+  {
+    title: "薪資稅務試算",
+    description: "輸入月薪或年薪，快速預估勞健保扣除額與個人綜合所得稅。",
+    icon: "wallet",
+    link: "/calculators/salary",
+    color: "bg-purple-500",
+    tags: ["實用", "稅務"]
+  },
+  {
+    title: "投資報酬率 (ROI)",
+    description: "計算各項投資的真實回報率，幫助您做出更好的財務決策。",
+    icon: "percent",
+    link: "/calculators/roi",
+    color: "bg-orange-500",
+    tags: ["投資"]
+  }
+];
+---
+
+<Layout title="首頁">
+  <Navbar />
+  
+  <main class="flex-grow">
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden bg-slate-900 text-white pt-20 pb-32">
+      <!-- Decorative background -->
+      <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+        <div class="absolute top-40 -left-40 w-96 h-96 bg-emerald-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-40 left-20 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+      </div>
+
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
+          精準計算，<span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400">聰明理財</span>
+        </h1>
+        <p class="text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+          SmartCalc Hub 提供最全面、易用的免費線上計算工具。無論是投資試算、買房規劃還是稅務計算，我們都能為您提供精確的解答。
+        </p>
+        <div class="flex justify-center gap-4">
+          <a href="#calculators" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-8 py-3 rounded-full transition-all shadow-lg hover:shadow-indigo-500/30 transform hover:-translate-y-1">
+            開始使用
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calculators Grid Section -->
+    <section id="calculators" class="py-20 bg-slate-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold text-slate-900 mb-4">熱門計算工具</h2>
+          <p class="text-slate-500 max-w-2xl mx-auto">挑選您需要的工具，只需輸入幾個數字，複雜的數學問題瞬間迎刃而解。</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {calculators.map((calc) => (
+            <a href={calc.link} class="group bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-xl hover:border-indigo-100 transition-all duration-300 transform hover:-translate-y-2 flex flex-col h-full">
+              <div class="flex items-center gap-4 mb-4">
+                <div class={`w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-inner ${calc.color}`}>
+                  {calc.icon === 'chart-line' && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>}
+                  {calc.icon === 'trending-up' && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>}
+                  {calc.icon === 'target' && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>}
+                  {calc.icon === 'home' && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>}
+                  {calc.icon === 'wallet' && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a8 8 0 0 1-5-1.524A6 6 0 0 1 15 15V9a6 6 0 0 1 10 2.215V19a2 2 0 0 1-2 2H6a4 4 0 0 1-4-4V7a2 2 0 0 1 2-2h14zm-4 4h-3a2 2 0 0 0 0 4h3V11z"/></svg>}
+                  {calc.icon === 'percent' && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>}
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">{calc.title}</h3>
+              </div>
+              <p class="text-slate-600 mb-6 flex-grow">{calc.description}</p>
+              <div class="flex flex-wrap gap-2 mt-auto">
+                {calc.tags.map(tag => (
+                  <span class="text-xs font-medium bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md">{tag}</span>
+                ))}
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Ad Placeholder Section -->
+    <section class="py-12 bg-white border-t border-slate-100">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-slate-100 border border-slate-200 border-dashed rounded-xl h-32 flex flex-col items-center justify-center text-slate-400">
+            <span class="font-medium text-sm">AdSpace - 廣告版位預留區</span>
+            <span class="text-xs mt-1">Google AdSense (Responsive)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

@@ -1,0 +1,85 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import SalaryCalc from '../../components/calculators/SalaryCalc.tsx';
+---
+
+<Layout 
+  title="薪資與綜合所得稅試算 | 2024 年度最新免稅額" 
+  description="免費的薪資稅務試算工具，快速計算每月實領薪水、勞健保費用，以及年度綜合所得稅應繳金額。"
+>
+  <Navbar />
+  
+  <main class="flex-grow bg-slate-50 py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+      <!-- Breadcrumbs & Header -->
+      <div class="mb-8">
+        <nav class="flex text-sm text-slate-500 mb-4" aria-label="Breadcrumb">
+          <ol class="inline-flex items-center space-x-1 md:space-x-3">
+            <li class="inline-flex items-center">
+              <a href="/" class="hover:text-indigo-600 transition-colors">首頁</a>
+            </li>
+            <li>
+              <div class="flex items-center">
+                <svg class="w-4 h-4 text-slate-400 mx-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                <a href="#" class="hover:text-indigo-600 transition-colors">實用工具</a>
+              </div>
+            </li>
+            <li aria-current="page">
+              <div class="flex items-center">
+                <svg class="w-4 h-4 text-slate-400 mx-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                <span class="text-slate-800 font-medium">薪資稅務試算</span>
+              </div>
+            </li>
+          </ol>
+        </nav>
+        
+        <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">薪資與綜合所得稅試算</h1>
+        <p class="text-lg text-slate-600 max-w-3xl">
+          剛收到 Offer 不知道實領多少？到了報稅季不知道要準備多少錢繳稅？使用這款試算工具，輸入您的薪資條件與家庭狀況，我們幫您快速估算！(採用 2024 年最新免稅額度計算)
+        </p>
+      </div>
+
+      <!-- Main Calculator Component -->
+      <SalaryCalc client:load />
+
+      <!-- Educational Content (SEO) -->
+      <article class="mt-16 prose prose-slate max-w-none bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+        <h2 class="text-2xl font-bold text-slate-900 mb-6">2024 年報稅新制一次看 (112年度所得)</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-lg font-bold text-slate-800 mb-2">免稅額與標準扣除額調升</h3>
+            <p class="text-slate-600 mb-4 text-sm">
+              由於物價指數上漲，2024 年報稅時適用的免稅額與各項扣除額皆有調高，幫全民省下了不少稅金！
+            </p>
+            <ul class="text-slate-600 text-sm list-disc pl-4 space-y-2">
+              <li><strong>一般免稅額：</strong>從 9.2 萬調高至 <span class="font-bold text-purple-600">9.7 萬元</span>。</li>
+              <li><strong>標準扣除額：</strong>單身者調高至 <span class="font-bold text-purple-600">13.1 萬元</span>；有配偶者調高至 <span class="font-bold text-purple-600">26.2 萬元</span>。</li>
+              <li><strong>薪資所得特別扣除額：</strong>調高至最高 <span class="font-bold text-purple-600">21.8 萬元</span>。</li>
+            </ul>
+          </div>
+          <div class="bg-purple-50 p-6 rounded-xl border border-purple-100">
+            <h4 class="font-bold text-purple-900 mb-2">💡 節稅小撇步：單身免稅門檻</h4>
+            <p class="text-purple-800 text-sm mb-2">
+              如果你是單身上班族，年收入在多少以下可以不用繳稅呢？
+            </p>
+            <p class="text-purple-800 text-sm font-medium">
+              免稅額 9.7萬 + 標準扣除 13.1萬 + 薪資扣除 21.8萬 = <span class="text-xl font-bold">44.6 萬元</span>
+            </p>
+            <p class="text-purple-800 text-sm mt-2">
+              換句話說，如果你的年收入（含年終獎金）在 44.6 萬以下，基本上就是免繳稅的族群喔！
+            </p>
+          </div>
+        </div>
+      </article>
+      
+      <!-- Top Ad Placeholder -->
+      <div class="mt-8 bg-slate-200 border border-slate-300 border-dashed rounded-xl h-24 flex flex-col items-center justify-center text-slate-500">
+         <span class="font-medium text-sm">AdSpace - 內容底部廣告</span>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
