@@ -1,7 +1,10 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { toPng } from 'html-to-image';
+import download from 'downloadjs';
 
 export default function MortgageCalc() {
+  const calcRef = useRef<HTMLDivElement>(null);
   const [loanAmount, setLoanAmount] = useState<number>(10000000);
   const [years, setYears] = useState<number>(30);
   const [interestRate, setInterestRate] = useState<number>(2.06);
@@ -13,7 +16,6 @@ export default function MortgageCalc() {
     const graceMonths = gracePeriodYears * 12;
     const monthlyRate = interestRate / 100 / 12;
     
-    // Original plan
     let monthlyPayment = 0;
     const remainingMonths = totalMonths - graceMonths;
     if (remainingMonths > 0 && monthlyRate > 0) {
@@ -23,13 +25,7 @@ export default function MortgageCalc() {
       monthlyPayment = Math.round(loanAmount / remainingMonths);
     }
 
-    // Comparison logic: Simulate early repayment impact
-    // This is a simplified projection for the "Extra Repayment" impact
     const totalInterestOriginal = (monthlyPayment * remainingMonths) - loanAmount;
-    
-    // Rough estimate of savings: 
-    // If extraYearlyRepayment is added, it reduces principal faster.
-    // Savings = (ExtraRepayment * Years) * (InterestRate/100) * factor
     const savingsEstimate = Math.round(extraYearlyRepayment * years * (interestRate / 100) * 0.8);
     const totalInterestNew = Math.max(0, totalInterestOriginal - savingsEstimate);
 
@@ -49,8 +45,16 @@ export default function MortgageCalc() {
     return new Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', maximumFractionDigits: 0 }).format(val);
   };
 
+  const handleDownload = () => {
+    if (calcRef.current) {
+      toPng(calcRef.current).then((dataUrl) => {
+        download(dataUrl, 'my-mortgage-plan.png');
+      });
+    }
+  };
+
   return (
-    <div className="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden p-8">
+    <div ref={calcRef} className="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden p-8">
       <h2 className="text-2xl font-bold text-slate-900 mb-6">貸款彈性試算</h2>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -72,7 +76,6 @@ export default function MortgageCalc() {
           <div>
             <label className="block text-sm font-medium text-slate-700">每年額外償還本金 (TWD)</label>
             <input type="number" value={extraYearlyRepayment} onChange={(e) => setExtraYearlyRepayment(Number(e.target.value))} className="w-full p-3 border border-blue-500 rounded-xl bg-blue-50" />
-            <p className="text-xs text-slate-500 mt-1">透過每年多還一點本金，觀察利息省下多少</p>
           </div>
         </div>
 
@@ -96,6 +99,12 @@ export default function MortgageCalc() {
           </div>
         </div>
       </div>
+      <button 
+        onClick={handleDownload}
+        className="mt-6 w-full py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition"
+      >
+        下載我的理財試算報告
+      </button>
     </div>
   );
 }
