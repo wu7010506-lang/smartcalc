@@ -5,11 +5,33 @@ import download from 'downloadjs';
 
 export default function MortgageCalc() {
   const calcRef = useRef<HTMLDivElement>(null);
-  const [loanAmount, setLoanAmount] = useState<number>(10000000);
-  const [years, setYears] = useState<number>(30);
-  const [interestRate, setInterestRate] = useState<number>(2.06);
-  const [gracePeriodYears, setGracePeriodYears] = useState<number>(0);
-  const [extraYearlyRepayment, setExtraYearlyRepayment] = useState<number>(0);
+  // Load initial values from localStorage
+  const [loanAmount, setLoanAmount] = useState<number>(() => 
+    typeof window !== 'undefined' ? Number(localStorage.getItem('loanAmount')) || 10000000 : 10000000
+  );
+  const [years, setYears] = useState<number>(() => 
+    typeof window !== 'undefined' ? Number(localStorage.getItem('years')) || 30 : 30
+  );
+  const [interestRate, setInterestRate] = useState<number>(() => 
+    typeof window !== 'undefined' ? Number(localStorage.getItem('interestRate')) || 2.06 : 2.06
+  );
+  const [gracePeriodYears, setGracePeriodYears] = useState<number>(() => 
+    typeof window !== 'undefined' ? Number(localStorage.getItem('gracePeriodYears')) || 0 : 0
+  );
+  const [extraYearlyRepayment, setExtraYearlyRepayment] = useState<number>(() => 
+    typeof window !== 'undefined' ? Number(localStorage.getItem('extraYearlyRepayment')) || 0 : 0
+  );
+
+  // Save to localStorage when values change
+  useMemo(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('loanAmount', loanAmount.toString());
+      localStorage.setItem('years', years.toString());
+      localStorage.setItem('interestRate', interestRate.toString());
+      localStorage.setItem('gracePeriodYears', gracePeriodYears.toString());
+      localStorage.setItem('extraYearlyRepayment', extraYearlyRepayment.toString());
+    }
+  }, [loanAmount, years, interestRate, gracePeriodYears, extraYearlyRepayment]);
 
   const results = useMemo(() => {
     const totalMonths = years * 12;
