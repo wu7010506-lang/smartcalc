@@ -21,16 +21,14 @@ export default function MortgageCalc() {
   const [extraYearlyRepayment, setExtraYearlyRepayment] = useState<number>(() => 
     typeof window !== 'undefined' ? Number(localStorage.getItem('extraYearlyRepayment')) || 0 : 0
   );
+  const [banks, setBanks] = useState<{name: string, rate: number}[]>([]);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('loanAmount', loanAmount.toString());
-      localStorage.setItem('years', years.toString());
-      localStorage.setItem('interestRate', interestRate.toString());
-      localStorage.setItem('gracePeriodYears', gracePeriodYears.toString());
-      localStorage.setItem('extraYearlyRepayment', extraYearlyRepayment.toString());
-    }
-  }, [loanAmount, years, interestRate, gracePeriodYears, extraYearlyRepayment]);
+    fetch('/api/rates.json')
+      .then(res => res.json())
+      .then(data => setBanks(data.banks))
+      .catch(err => console.error("Failed to load rates:", err));
+  }, []);
 
   const results = useMemo(() => {
     const totalMonths = years * 12;
@@ -91,7 +89,18 @@ export default function MortgageCalc() {
              </div>
              <div>
                 <label className="block text-sm font-medium text-slate-700">年利率 (%)</label>
-                <input type="number" value={interestRate} onChange={(e) => setInterestRate(Number(e.target.value))} step="0.01" className="w-full p-3 border rounded-xl" />
+                <div className="flex gap-2">
+                  <input type="number" value={interestRate} onChange={(e) => setInterestRate(Number(e.target.value))} step="0.01" className="w-1/2 p-3 border rounded-xl" />
+                  <select 
+                    className="w-1/2 p-3 border rounded-xl bg-white text-sm"
+                    onChange={(e) => setInterestRate(Number(e.target.value))}
+                  >
+                    <option value={interestRate}>選擇銀行參考</option>
+                    {banks.map(bank => (
+                      <option key={bank.name} value={bank.rate}>{bank.name} ({bank.rate}%)</option>
+                    ))}
+                  </select>
+                </div>
              </div>
           </div>
           <div>
