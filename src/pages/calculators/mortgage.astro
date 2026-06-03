@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import MortgageCalc from '../../components/calculators/MortgageCalc.tsx';
+import Recommendation from '../../components/Recommendation.astro';
 ---
 
 <Layout 
@@ -43,6 +44,9 @@ import MortgageCalc from '../../components/calculators/MortgageCalc.tsx';
 
       <!-- Main Calculator Component -->
       <MortgageCalc client:load />
+
+      <!-- Recommendation Section -->
+      <Recommendation />
 
       <!-- Educational Content (SEO) -->
       <article class="mt-16 prose prose-slate max-w-none bg-white p-8 rounded-3xl shadow-sm border border-slate-100">

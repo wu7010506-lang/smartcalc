@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="理財公式字典" description="掌握理財關鍵公式，從複利到房貸攤還，提升你的財務決策能力。">
+  <Navbar />
+  <main class="py-12 bg-slate-50 min-h-screen">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <h1 class="text-4xl font-extrabold text-slate-900 mb-8">理財核心公式字典</h1>
+      
+      <div class="space-y-8">
+        <section class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+          <h2 class="text-2xl font-bold text-indigo-600 mb-4">1. 房貸本息平均攤還公式</h2>
+          <p class="text-slate-600 mb-4">
+            房貸每月還款金額計算公式，將貸款總額與利息分攤至每個月。
+          </p>
+          <div class="bg-slate-900 text-white p-6 rounded-xl font-mono text-center">
+            M = P [ i(1 + i)^n ] / [ (1 + i)^n – 1 ]
+          </div>
+          <ul class="mt-4 text-sm text-slate-500 list-disc pl-5">
+            <li>M = 每月還款金額</li>
+            <li>P = 貸款總本金</li>
+            <li>i = 每月利率（年利率 / 12）</li>
+            <li>n = 總還款期數（年限 * 12）</li>
+          </ul>
+        </section>
+
+        <section class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+          <h2 class="text-2xl font-bold text-indigo-600 mb-4">2. 複利終值公式</h2>
+          <p class="text-slate-600 mb-4">
+            計算投資在經過一段時間複利滾動後的總價值。
+          </p>
+          <div class="bg-slate-900 text-white p-6 rounded-xl font-mono text-center">
+            FV = PV * (1 + r)^n
+          </div>
+          <ul class="mt-4 text-sm text-slate-500 list-disc pl-5">
+            <li>FV = 未來價值 (Future Value)</li>
+            <li>PV = 現值 (Present Value)</li>
+            <li>r = 報酬率</li>
+            <li>n = 期數</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>

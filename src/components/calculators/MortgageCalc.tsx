@@ -121,12 +121,17 @@ export default function MortgageCalc() {
           </div>
         </div>
       </div>
+      <div className="mt-6 text-center text-sm text-slate-500">
+        <p>
+          計算公式：<a href="/glossary" className="text-indigo-600 hover:underline font-medium">房貸本息平均攤還公式</a>
+        </p>
+      </div>
       <button 
         onClick={handleDownload}
         className="mt-6 w-full py-4 bg-orange-500 text-white rounded-xl font-bold hover:bg-orange-600 transition-all transform hover:scale-105 animate-pulse shadow-lg"
       >
         🚀 下載我的理財試算報告 (NEW)
       </button>
-    </div>
-  );
-}
+      </div>
+      </div>
+      </div>
