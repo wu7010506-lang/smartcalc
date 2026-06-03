@@ -1,11 +1,11 @@
-import { useState, useMemo, useRef } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { toPng } from 'html-to-image';
 import download from 'downloadjs';
 
 export default function MortgageCalc() {
   const calcRef = useRef<HTMLDivElement>(null);
-  // Load initial values from localStorage
+
   const [loanAmount, setLoanAmount] = useState<number>(() => 
     typeof window !== 'undefined' ? Number(localStorage.getItem('loanAmount')) || 10000000 : 10000000
   );
@@ -22,8 +22,7 @@ export default function MortgageCalc() {
     typeof window !== 'undefined' ? Number(localStorage.getItem('extraYearlyRepayment')) || 0 : 0
   );
 
-  // Save to localStorage when values change
-  useMemo(() => {
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('loanAmount', loanAmount.toString());
       localStorage.setItem('years', years.toString());
@@ -121,17 +120,19 @@ export default function MortgageCalc() {
           </div>
         </div>
       </div>
+      
       <div className="mt-6 text-center text-sm text-slate-500">
         <p>
           計算公式：<a href="/glossary" className="text-indigo-600 hover:underline font-medium">房貸本息平均攤還公式</a>
         </p>
       </div>
+      
       <button 
         onClick={handleDownload}
         className="mt-6 w-full py-4 bg-orange-500 text-white rounded-xl font-bold hover:bg-orange-600 transition-all transform hover:scale-105 animate-pulse shadow-lg"
       >
         🚀 下載我的理財試算報告 (NEW)
       </button>
-      </div>
-      </div>
-      </div>
+    </div>
+  );
+}
