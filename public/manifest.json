@@ -1,0 +1,16 @@
+{
+  "name": "SmartCalc Hub",
+  "short_name": "SmartCalc",
+  "description": "免費好用的理財計算工具，包含房貸、退休、ETF試算。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
