@@ -123,9 +123,9 @@ export default function MortgageCalc() {
       </div>
       <button 
         onClick={handleDownload}
-        className="mt-6 w-full py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition"
+        className="mt-6 w-full py-4 bg-orange-500 text-white rounded-xl font-bold hover:bg-orange-600 transition-all transform hover:scale-105 animate-pulse shadow-lg"
       >
-        下載我的理財試算報告
+        🚀 下載我的理財試算報告 (NEW)
       </button>
     </div>
   );
